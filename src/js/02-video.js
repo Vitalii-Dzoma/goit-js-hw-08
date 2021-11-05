@@ -16,4 +16,4 @@ function onTimeUpdate(data) {
  
 }
 const parsedData = JSON.parse(localStorage.getItem("videoplayer-current-time"))
-   player.setCurrentTime(parsedData)
+player.setCurrentTime(parsedData);
