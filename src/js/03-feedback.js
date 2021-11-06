@@ -7,35 +7,32 @@ let parsedData;
 mailEl.addEventListener("input", throttle(writeIn, 500) )
 messageEl.addEventListener("input", throttle(writeIn, 500))
 
+
+
+if (localStorage.getItem("feedback-form-state")) {
+  parsedData = JSON.parse(localStorage.getItem("feedback-form-state"))
+    mailEl.value = parsedData.email
+  messageEl.value = parsedData.message
+}
+
 function writeIn() {
     localStorage.setItem("feedback-form-state", JSON.stringify({
         email: mailEl.value,
         message: messageEl.value,
-        
     }))
 
-    
-parsedData = JSON.parse(localStorage.getItem("feedback-form-state"))
+    parsedData = JSON.parse(localStorage.getItem("feedback-form-state"))
+}
+
+
+formEl.addEventListener("submit", cleanLocalStorage)
      
-
-}
-
 function cleanLocalStorage(event) {
-     console.log(parsedData)
-             event.preventDefault()
-             formEl.reset();
-                localStorage.clear();
-    }
-    
-    formEl.addEventListener("submit", cleanLocalStorage)
-function getResult() {
-    if (parsedData) {
-        mailEl.value = parsedData.email
-    messageEl.value = parsedData.message
-    }
-
+    event.preventDefault()
+    console.log(parsedData)
+    formEl.reset()
+    localStorage.clear()
 }
-
 
   
 
